@@ -1,0 +1,17 @@
+[
+    {
+    "code":"A5b8aAkte98hJ",
+    "name":"Buku Pemrograman C++",
+    "price" : 140000
+    },
+ {
+    "code":"A5b8aAkte98hJ",
+    "name":"Laskar Pelangi",
+    "price" : 130000
+},
+{
+    "code":"A5b8aAkte98hJ",
+    "name":"Buku Pemrograman Golang",
+    "price" : 1500000
+}
+]
