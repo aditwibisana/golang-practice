@@ -16,10 +16,22 @@ var err error
 
 type Heroes struct {
 	Name          string `json:"name"`
-	BirthYear     string `json:"birth_year"`
-	DeathYear     string `json:"death_year"`
+	BirthYear     string `json:"birth_year,int"`
+	DeathYear     int    `json:"death_year"`
 	Description   string `json:"description"`
-	AscensionYear string `json:"ascension_year"`
+	AscensionYear int    `json:"ascension_year"`
+}
+type Gunung struct {
+	Nama                    string `json:"nama"`
+	Bentuk                  string `json:"bentuk"`
+	TinggiMeter             string `json:"tinggi_meter"`
+	EstimasiLetusanTerakhir string `json:"estimasi_letusan_terakhir,int"`
+	Geolokasi               string `json:"geolokasi"`
+}
+
+type Hewan struct {
+	Nama    string `json:"nama"`
+	Makanan string `json:"makanan"`
 }
 type Result struct {
 	Code    int         `json:"code"`
@@ -35,7 +47,7 @@ func main() {
 		log.Println("Connection Success")
 
 	}
-	db.AutoMigrate(&Heroes{})
+	db.AutoMigrate(&Heroes{}, &Gunung{}, &Hewan{})
 	handleRequests()
 }
 
@@ -53,7 +65,7 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Welcome to my API")
 }
 func viewHeroes(w http.ResponseWriter, r *http.Request) {
-	linkUrl := ("https://indonesia-public-static-api.vercel.app/api/heroes")
+	linkUrl := ("https://mocki.io/v1/3caa2d1a-ac48-4e5a-b8e8-db66d4e698dd")
 	resp, err := http.Get(linkUrl)
 
 	if err != nil {
@@ -61,14 +73,14 @@ func viewHeroes(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	defer resp.Body.Close()
-	var heroes []Heroes
-	if err := json.NewDecoder(resp.Body).Decode(&heroes); err != nil {
+	var hewan []Hewan
+	if err := json.NewDecoder(resp.Body).Decode(&hewan); err != nil {
 		fmt.Println(err.Error())
 		return
 	}
 	res := Result{
 		Code:    http.StatusOK,
-		Data:    heroes,
+		Data:    hewan,
 		Message: "Success",
 	}
 	result, err := json.Marshal(res)
@@ -79,4 +91,5 @@ func viewHeroes(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(result)
+	fmt.Println(hewan)
 }
