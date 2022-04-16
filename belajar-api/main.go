@@ -91,5 +91,9 @@ func viewHeroes(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(result)
-	fmt.Println(hewan)
+
+	for _, v := range hewan {
+		db.Create(&v)
+	}
+
 }
