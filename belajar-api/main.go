@@ -10,7 +10,7 @@ import (
 var db *gorm.DB
 var err error
 
-type Pahlawan []struct {
+type Heroes []struct {
 	Name          string `json:"name"`
 	BirthYear     int    `json:"birth_year"`
 	DeathYear     int    `json:"death_year"`
@@ -21,12 +21,12 @@ type Pahlawan []struct {
 func main() {
 	db, err = gorm.Open("mysql", "root:@/golang-heroes?charset=utf8&parseTime=True")
 	if err != nil {
-		panic("failed to connect database")
+		log.Println("failed to connect database", err)
 	} else {
 		log.Println("Connection Success")
 
 	}
-	db.AutoMigrate(&Pahlawan{})
+	db.AutoMigrate(&Heroes{})
 	//handleRequests()
 }
 
