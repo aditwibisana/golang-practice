@@ -1,8 +1,10 @@
 package main
 
 import (
-	"C:/belajar_golang/src/auth-api/database"
-	"C:/belajar_golang/src/auth-api/routes"
+	"github.com/aditwibisana/golang-practice/auth-api/routes"
+
+	"github.com/aditwibisana/golang-practice/auth-api/database"
+
 	"github.com/gofiber/fiber"
 )
 
